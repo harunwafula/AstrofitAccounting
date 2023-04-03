@@ -1,0 +1,94 @@
+<form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+
+    <p>
+        <mat-form-field appearance="outline"> 
+            <mat-label>Amount</mat-label>
+            <input matInput type="number" placeholder="0" formControlName="amount">
+            <span matTextPrefix>R&nbsp;</span>
+
+            <mat-error
+                *ngIf="transFormControl.amount.hasError('required')">
+                Amount is required
+            </mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline"> 
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker [startAt]="startDate"></mat-datepicker>
+            <mat-error
+            *ngIf="transFormControl.date.hasError('required')">
+            Date is required
+        </mat-error>
+         </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline"> 
+            <mat-label>Details</mat-label>
+            <input matInput placeholder="Details" formControlName="details">
+            <mat-error
+            *ngIf="transFormControl.details.hasError('required')">
+            Details are required
+        </mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline"> 
+            <mat-label>Account</mat-label>
+            <input matInput placeholder="Account" formControlName="account">
+            <mat-error
+            *ngIf="transFormControl.account.hasError('required')">
+            Account is required
+        </mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline"> 
+            <mat-label>Transaction Type</mat-label>
+            <mat-select formControlName="type">
+                <mat-option *ngFor="let transactionType of transactionTypes" [value]="transactionType">
+                  {{transactionType}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+            *ngIf="transFormControl.type.hasError('required')">
+            Type is required
+        </mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline"> 
+            <mat-label>Fulfiller</mat-label>
+            <mat-select formControlName="fulfiller">
+                <mat-option *ngFor="let fulfiller of fulfillers" [value]="fulfiller">
+                  {{fulfiller}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+            *ngIf="transFormControl.fulfiller.hasError('required')">
+            Fulfiller is required
+        </mat-error>
+        </mat-form-field>
+    </p>
+    
+    <p>
+        <mat-form-field appearance="outline"> 
+            <mat-label>Organization</mat-label>
+            <mat-select formControlName="organization">
+                <mat-option *ngFor="let organization of organizations" [value]="organization">
+                  {{organization}}
+                </mat-option>
+              </mat-select>
+            
+            
+            <mat-error
+            *ngIf="transFormControl.organization.hasError('required')">
+            Organization is required
+        </mat-error>
+        </mat-form-field>
+    </p>
+    <button type="submit" mat-raised-button color="primary" >Add Transaction</button>
+</form>
+

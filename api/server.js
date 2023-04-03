@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+require('dotenv').config();
 
 
 const app = express();
@@ -9,7 +10,7 @@ const port = 3000;
 
 
 let corsOptions = {
-  origin: constants.clientUrl
+  origin: "http://localhost:4200"
 };
 app.get("/", (req, res) => {
     res.send("hello world");
@@ -37,6 +38,7 @@ mongoose.connect('mongodb+srv://astroauth:cBubJslXI8lcf9bU@cluster0.xeye1bv.mong
 
 //routes
 require("./routes/transactions.routes")(app);
+require("./routes/auth.routes")(app);
 
 
 app.listen(port, () => {

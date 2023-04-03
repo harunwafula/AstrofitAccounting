@@ -8,7 +8,7 @@ const Transaction = mongoose.model(
             "details" : String,
             "account" : String,
             "fulfiller" : String,
-            "subsidiary" : String,
+            "organization" : String,
             "type" : String
         }
     )

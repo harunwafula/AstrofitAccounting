@@ -3,25 +3,35 @@ const db = require("../models/index");
 const Transaction = db.transaction;
 
 
-exports.addTransaction = async (req, res) => {
+exports.addTransaction =  (req, res) => {
     const transaction = new Transaction({
         date : req.body.date,
         amount : req.body.amount,
         details : req.body.details,
         account : req.body.account,
         fulfiller : req.body.fulfiller,
-        subsidiary : req.body.subsidiary,
+        organization : req.body.organization,
         type : req.body.type
 
     });
 
-    const result =  await transaction.save();
-    
-    if(result === null) {
+    transaction.save().then((result) => {
+        res.send(result);
+    }).catch((err) => {
         res.status(500).send({message : err});
-        return;
-    }
-    res.send({outcome : "was a success"});
+    });
     
+    
+    
+}
+
+
+exports.getTransactions = async (req, res) => {
+    Transaction.find({}).then((transactions) => {
+        res.send(transactions);
+    }).catch((error) => {
+        res.status(500).send({error : error})
+    });
+   
 }
 
