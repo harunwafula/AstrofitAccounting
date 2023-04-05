@@ -16,6 +16,7 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import {MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
+import {MatIconModule} from '@angular/material/icon';
 
 
 import { TransactionFormComponent } from './transaction-form/transaction-form.component';
@@ -23,6 +24,8 @@ import { HomeComponent } from './home/home.component';
 import { AuthComponent } from './auth/auth/auth.component';
 import { LoginFormComponent } from './auth/login-form/login-form.component';
 import { RegisterFormComponent } from './auth/register-form/register-form.component';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
 
 @NgModule({
@@ -47,9 +50,11 @@ import { RegisterFormComponent } from './auth/register-form/register-form.compon
     HttpClientModule,
     MatTableModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

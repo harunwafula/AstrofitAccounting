@@ -38,7 +38,31 @@ $client-theme: mat.define-light-theme((
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.h-100 {
+  width: 100vh;
+}
+
+.w-100 {
+  width: 100vw;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+a{
+  color: blue;
+}
 
 .mat-mdc-form-field {
   width: 100%;
+}
+
+.center {
+  margin : auto;
 }

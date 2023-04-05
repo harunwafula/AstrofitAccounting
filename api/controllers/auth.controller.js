@@ -14,7 +14,6 @@ exports.register = async (req, res) => {
         password : password
     });
 
-    console.log(process.env.SECRETKEY);
     user.save().then((user) => {
         const token = jwt.sign({id : user._id}, config.key01 , {
             expiresIn : 86400 //24hr
@@ -23,6 +22,8 @@ exports.register = async (req, res) => {
             {
                 username : user.username,
                 email : user.email,
+                id : user._id,
+
                 token : token
             }
         );
@@ -41,7 +42,7 @@ exports.login = async (req, res) => {
    if(user == null) {
         return res.status(404).send("User does not exist");
    }
-   const passwordIsValid = bcrypt.compare(user.password, req.body.password);
+   const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
    if(passwordIsValid){
         const token = jwt.sign({id:user._id}, config.key01, {
             expiresIn : 86400//24hrs in seconds
@@ -53,7 +54,7 @@ exports.login = async (req, res) => {
             token : token
         });
    }else {
-        return res.send(401).send("Invalid Password")
+       res.send({error : "Invalid Password"});
    }
 
 

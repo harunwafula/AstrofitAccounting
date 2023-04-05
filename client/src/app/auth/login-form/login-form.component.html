@@ -1,1 +1,44 @@
-<p>login-form works!</p>
+<h1>Login </h1>
+
+<p>
+    Please fill in the following fields
+</p>
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+
+
+    <p>
+        <mat-form-field appearance="outline"> 
+            <mat-label>Email Address</mat-label>
+            <input matInput placeholder="Email Address" formControlName="email">
+
+            <mat-error
+            *ngIf="loginForm.controls.email.hasError('required')">
+                Email is required
+        </mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline"> 
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+
+            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePassword" class="hide-btn">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+             </button>
+
+             <mat-error
+                *ngIf="loginForm.controls.password.hasError('required')">
+                Password is required
+            </mat-error>
+        </mat-form-field>
+    </p>
+
+    <button type="submit" mat-raised-button color="primary" >Login</button>
+
+</form>
+
+<p> Don't have an account?
+    <a (click)="goToRegister()" color="primary">Create Account</a>
+
+</p>

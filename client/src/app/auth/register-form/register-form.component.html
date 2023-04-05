@@ -1,1 +1,55 @@
-<p>register-form works!</p>
+
+<h1>Register</h1>
+
+<p>
+    Please fill in the following fields
+</p>
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+
+    <p>
+        <mat-form-field appearance="outline"> 
+            <mat-label>Full Name</mat-label>
+            <input matInput placeholder="Full Name" formControlName="name">
+
+            <mat-error
+                *ngIf="registerForm.controls.name.hasError('required')">
+                Name is required
+            </mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline"> 
+            <mat-label>Email Address</mat-label>
+            <input matInput placeholder="Email Address" formControlName="email">
+
+            <mat-error
+                *ngIf="registerForm.controls.email.hasError('required')">
+                    Email is required
+            </mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline"> 
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePassword" class="hide-btn">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+             </button>
+
+            <mat-error
+                *ngIf="registerForm.controls.password.hasError('required')">
+                Password is required
+            </mat-error>
+        </mat-form-field>
+    </p>
+
+    <button type="submit" mat-raised-button color="primary" >Register</button>
+
+</form>
+
+
+<p> Already have an account?
+    <a (click)="goToLogin()" color="primary">Log into Account</a>
+
+</p>

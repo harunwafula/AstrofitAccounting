@@ -1,0 +1,22 @@
+.forms {
+    width: 30vw;
+    padding: 30px;
+}
+
+.auth-banner {
+    height: 100vh;
+    width: 70vw;
+    background-color: black;
+    position: relative;
+    
+}
+
+.banner-logo {
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
